@@ -53,7 +53,7 @@
     constructor() { this.t = 0; this.pausable = false; }
     update(dt) {
       this.t += dt;
-      if (this.t > 0.3 && G.input.anyAction()) { G.audio.play('select'); G.next(); }
+      if (this.t > 0.3 && G.input.anyAction()) { G.audio.play('select'); G.fullscreen.enter(); G.next(); }
     }
     draw(ctx) {
       const t = this.t, sea = 160;

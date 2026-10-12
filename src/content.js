@@ -275,7 +275,7 @@
 
     pause: {
       title: 'PAUSED',
-      items: ['Resume', 'Restart room', 'Sound', 'Music', 'Quit to title'],
+      items: ['Resume', 'Restart room', 'Sound', 'Music', 'Fullscreen', 'Quit to title'],
       on: 'ON', off: 'OFF',
       hint: 'W/S or ↑/↓ · F / Enter · Esc',
       keys: 'M: all sound · N: music · - / +: music volume',

@@ -121,6 +121,7 @@
     else if (pause.sel === 1) { pause.on = false; G.restartRoom(); }
     else if (pause.sel === 2) G.audio.toggleMute();
     else if (pause.sel === 3) G.audio.toggleMusic();
+    else if (pause.sel === 4) G.fullscreen.toggle();
     else { pause.on = false; G.goTo(0); }
   }
 
@@ -132,7 +133,8 @@
     F.draw(ctx, P.title, R.W / 2, y + 8, { scale: 2, align: 'center', color: '#ffd166', outline: '#0b0e1c' });
     P.items.forEach((item, i) => {
       const label = i === 2 ? item + ': ' + (G.audio.muted ? P.off : P.on)
-        : i === 3 ? item + ': ' + (G.audio.musicMuted ? P.off : P.on) : item;
+        : i === 3 ? item + ': ' + (G.audio.musicMuted ? P.off : P.on)
+        : i === 4 ? item + ': ' + (G.fullscreen.on ? P.on : P.off) : item;
       const sel = i === pause.sel, iy = y + 32 + i * 16;
       if (sel) R.rect(ctx, '#2f3d70', x + 10, iy - 3, w - 20, 14);
       F.draw(ctx, (sel ? '→ ' : '') + label, R.W / 2, iy, { align: 'center', color: sel ? '#ffffff' : '#9fb0d8' });
