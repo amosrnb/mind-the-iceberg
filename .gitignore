@@ -1,0 +1,5 @@
+# Style-reference screenshots of the Google Doodle game: not ours to publish
+reference/
+
+# Local dev tools (dev server, test harness)
+.claude/
