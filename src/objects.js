@@ -180,7 +180,8 @@
         R.disc(ctx, this.filled ? '#fff1b8' : '#c9d3e4', r.x + 8, r.y + 7, 5, 2);
       },
       drawAbove(ctx, t) {
-        const label = this.revealed ? 'Age ' + def.short : '?';
+        // once read, the stage name is shown too (until the tablet itself sits on the pedestal)
+        const label = !this.revealed ? '?' : this.filled ? 'Age ' + def.short : C.stages.tablets[def.accept] + ' ' + def.short;
         const y = r.y - (this.filled ? 32 : 22) + (this.revealed ? 0 : Math.round(Math.sin(t * 3 + def.x)));
         F.draw(ctx, label, r.x + 8, y, { align: 'center', color: this.filled ? '#ffd166' : this.revealed ? '#eaf2ff' : '#c9a7ff', outline: '#141022' });
       },

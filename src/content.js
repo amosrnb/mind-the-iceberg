@@ -104,12 +104,14 @@
         'Together you form his EGO: the balance between you. Keep it steady!',
         'How to play: [P1] walks with WASD and acts with F. [P2] walks with the arrow keys and acts with Enter. Esc pauses the game.',
         'You can only leave a room TOGETHER: both of you must stand in the exit at the same time.',
+        'The counter at the top left shows ANXIETY ATTACKS. I will explain them soon. Try to keep it at zero!',
         'The mind is like an iceberg. Most of it is hidden below the surface. Now, both of you: sit on the couch.',
       ],
     },
 
     surface: {
       intro: [
+        "We are inside Hans's mind now. I can't come with you, but you will hear my voice guiding you.",
         "This is the conscious mind. Let's see what you two can do.",
         '[P1], you are the ID. You exist from birth and want everything NOW. Freud called this the PLEASURE PRINCIPLE: do what feels good, right away.',
         'Walk up to the cracked crates and press F to SMASH them!',
@@ -188,7 +190,7 @@
       title: 'Which stage?',
       quiz: [
         { q: '"I can\'t stop biting my nails… and I smoke a lot."', answer: 0,
-          right: 'Right! Oral fixation: smoking, nail-biting, chewing, sarcasm.',
+          right: 'Right! Oral fixation: smoking, nail-biting, chewing, and sarcasm ("biting" people with words).',
           hint: 'Which stage is all about the mouth?' },
         { q: '"Everything must be perfectly tidy. And I never lend anyone money!"', answer: 1,
           right: 'Right! Anal-retentive: obsessively tidy and stingy (strict toilet training). Anal-expulsive people are messy and disorganised.',
@@ -233,7 +235,8 @@
     boss: {
       intro: [
         { who: 'repressor', text: 'THIS MEMORY STAYS LOCKED. FORGET IT. FORGET… EVERYTHING.' },
-        "There it is: the vault where Hans's Ego REPRESSED the memory. Open the three locks!",
+        "That is THE REPRESSOR: Hans's repression in person, the force that keeps painful memories locked away.",
+        "Behind it is the vault where Hans's Ego REPRESSED the memory. Open the three locks!",
         'To open a lock, [P1] stands on the RED plate and [P2] on the BLUE plate, TOGETHER, while the Ego is balanced. Then answer my question.',
         'Dodge the grey fog! If it hits [P1], the Id grows stronger. If it hits [P2], the Superego does. Either way, the Ego loses its balance.',
       ],
