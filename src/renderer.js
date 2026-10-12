@@ -8,15 +8,38 @@
   const ctx = canvas.getContext('2d');
   ctx.imageSmoothingEnabled = false;
 
-  // Largest integer scale that fits; the black body background letterboxes the rest.
+  // Scale as large as the window allows (16:9 kept, pixels stay sharp); black bars fill the rest.
   function resize() {
     const k = Math.min(window.innerWidth / W, window.innerHeight / H);
-    const s = k >= 1 ? Math.floor(k) : k;
-    canvas.style.width = W * s + 'px';
-    canvas.style.height = H * s + 'px';
+    canvas.style.width = Math.floor(W * k) + 'px';
+    canvas.style.height = Math.floor(H * k) + 'px';
   }
   window.addEventListener('resize', resize);
+  document.addEventListener('fullscreenchange', resize);
+  document.addEventListener('webkitfullscreenchange', resize);
   resize();
+
+  // Real fullscreen. Browsers only allow it right after a key press or click.
+  // Where supported (Chrome / Edge), Esc is kept for the pause menu: hold Esc to leave fullscreen.
+  const fullscreen = {
+    get on() { return !!(document.fullscreenElement || document.webkitFullscreenElement); },
+    enter() {
+      if (fullscreen.on) return;
+      const el = document.documentElement;
+      const req = el.requestFullscreen ? el.requestFullscreen({ navigationUI: 'hide' }) : el.webkitRequestFullscreen && el.webkitRequestFullscreen();
+      Promise.resolve(req)
+        .then(() => { if (navigator.keyboard && navigator.keyboard.lock) return navigator.keyboard.lock(['Escape']); })
+        .catch(() => { /* not allowed or not supported: the game still fills the window */ });
+    },
+    exit() {
+      if (!fullscreen.on) return;
+      if (navigator.keyboard && navigator.keyboard.unlock) navigator.keyboard.unlock();
+      const r = document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
+      Promise.resolve(r).catch(() => {});
+    },
+    toggle() { if (fullscreen.on) fullscreen.exit(); else fullscreen.enter(); },
+  };
+  canvas.addEventListener('dblclick', () => fullscreen.toggle());
 
   function makeCanvas(w, h) {
     const c = document.createElement('canvas');
@@ -91,5 +114,6 @@
     return ((h ^ (h >>> 16)) >>> 0) / 4294967295;
   }
 
+  G.fullscreen = fullscreen;
   G.R = { W, H, canvas, ctx, makeCanvas, rect, shade, mix, disc, ring, panel, hash };
 })();
