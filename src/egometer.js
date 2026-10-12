@@ -27,11 +27,14 @@
     // Wrong answers push 25 points away from the centre (toward the Id side if at 0).
     wrong(room) { E.add(room, (G.game.ego > 0 ? 1 : -1) * 25); },
 
-    reset() { E.shakeT = 0; E.attack = 0; },
+    // Value the meter returns to after an anxiety attack (0 by default; a room can change it).
+    resetTo: 0,
+
+    reset() { E.shakeT = 0; E.attack = 0; E.resetTo = 0; },
 
     update(dt) {
       E.shakeT = Math.max(0, E.shakeT - dt);
-      if (E.attack > 0 && (E.attack -= dt) <= 0) { E.attack = 0; G.game.ego = 0; }
+      if (E.attack > 0 && (E.attack -= dt) <= 0) { E.attack = 0; G.game.ego = E.resetTo; }
     },
 
     meterShake: () => (E.shakeT > 0 ? 2 : Math.abs(G.game.ego) > 70 ? 1 : 0),

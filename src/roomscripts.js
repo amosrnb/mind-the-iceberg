@@ -21,6 +21,9 @@
     egogate: {
       enter(room) {
         G.game.ego = C.egogate.startEgo;
+        // Until the gate is open, an anxiety attack must not balance the Ego for the players:
+        // it throws the meter back to the start value instead of 0.
+        G.Ego.resetTo = C.egogate.startEgo;
         room.wait(0.5, () => room.say(C.egogate.intro));
       },
       update(room) {
@@ -28,6 +31,7 @@
         if (s.balanced || room.frozen || G.Ego.attack > 0 || !G.Ego.balanced()) return;
         // Balanced: the ice cracks, the gate opens partly and the quiz starts.
         s.balanced = true;
+        G.Ego.resetTo = 0;
         G.audio.play('door');
         room.shake(0.25);
         room.tween('gateOpen', 0.35, 0.8);
